@@ -1,3 +1,5 @@
+--How to write hello world in rust ?
+//some diffirent ways to write hello world for me !
 use std::fs::File;
 use std::io::Write;
 use std::process::exit;
