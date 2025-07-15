@@ -41,4 +41,14 @@ fn main(){
     std::io::Write::flush(&mut stdout).expect("Failed !") ;         //remember that this line must return error 
 }
 
+//write hello world in raw ay byte by byte 
+use std::io::{self, Write};
+fn main() {
+    let mut stdout = io::stdout();
+    let message = b"Hello, world! (dd)\n";
+    for byte in message {
+        stdout.write_all(&[*byte]).unwrap();   //de-ref ;
+    }
+}
+
 
