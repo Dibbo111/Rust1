@@ -146,3 +146,111 @@ fn main() {
         }
     }
 }
+
+//another way to write hello world with advance error handeling 
+use std::io;
+use std::io::Write;
+fn write_all_bytes(stdout: &mut io::Stdout, buffer: &[u8]) -> Result<(), io::Error> {
+    let mut total_written: usize = 0;
+    let buffer_len: usize = buffer.len();
+    while total_written < buffer_len {
+        let slice_start: usize = total_written;
+        let slice_end: usize = buffer_len;
+        let slice: &[u8] = &buffer[slice_start..slice_end];
+        let write_result: Result<usize, io::Error> = stdout.write(slice);
+        match write_result {
+            Ok(bytes_written) => {
+                if bytes_written == 0 {
+                    let error: io::Error = io::Error::new(
+                        io::ErrorKind::WriteZero,
+                        "zero bytes written to stdout",
+                    );
+                    return Err(error);
+                }
+                total_written = total_written + bytes_written;
+            }
+            Err(error) => {
+                return Err(error);
+            }
+        }
+    }
+    Ok(())
+}
+fn main() -> Result<(), io::Error> {
+    let message: [u8; 14] = [
+        0x48, // H
+        0x65, // e
+        0x6C, // l
+        0x6C, // l
+        0x6F, // o
+        0x2C, // ,
+        0x20, // space
+        0x77, // w
+        0x6F, // o
+        0x72, // r
+        0x6C, // l
+        0x64, // d
+        0x21, // !
+        0x0A, // newline
+    ];
+    let mut stdout: io::Stdout = io::stdout();
+    let write_result: Result<(), io::Error> = write_all_bytes(&mut stdout, &message);
+    match write_result {
+        Ok(()) => {}
+        Err(e) => {
+            return Err(e);
+        }
+    }
+    let flush_result: Result<(), io::Error> = stdout.flush();
+    match flush_result {
+        Ok(()) => {}
+        Err(e) => {
+            return Err(e);
+        }
+    }
+    Ok(())
+}
+
+//another simple example of writing hello world 
+use std::io;
+use std::io::Write;
+fn main() -> Result<(), io::Error> {
+    let message: &[u8] = b"Hello World!\n";
+    let stdout: io::Stdout = io::stdout();
+    let mut handle: io::StdoutLock = stdout.lock();
+    let mut i: usize = 0;
+    let message_len: usize = message.len();
+    while i < message_len {
+        let start_index: usize = i;
+        let end_index: usize = i + 1;
+        let slice: &[u8] = &message[start_index..end_index];
+        let mut total_written: usize = 0;
+        let slice_len: usize = slice.len();
+        while total_written < slice_len {
+            let write_result: Result<usize, io::Error> = handle.write(&slice[total_written..slice_len]);
+            match write_result {
+                Ok(bytes_written) => {
+                    if bytes_written == 0 {
+                        let error: io::Error = io::Error::new(io::ErrorKind::WriteZero, "write returned 0 bytes");
+                        return Err(error);
+                    }
+                    total_written = total_written + bytes_written;
+                },
+                Err(error) => {
+                    return Err(error);
+                }
+            }
+        }
+        i = i + 1;
+    }
+    let flush_result: Result<(), io::Error> = handle.flush();
+    match flush_result {
+        Ok(()) => {
+            return Ok(());
+        },
+        Err(error) => {
+            return Err(error);
+        }
+    }
+}
+_____________________________________________hello world done_____________________________________________________
