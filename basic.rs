@@ -93,3 +93,15 @@ fn main(){
 
     }
 }
+
+//another simple of pointer on array 
+fn main() {
+    let arr = [666, 777, 888];
+    let ptr = arr.as_ptr(); 
+    unsafe {
+        println!("First value: {}", *ptr);         
+        println!("Second value: {}", *ptr.add(1)); 
+    }
+}
+//another simple example 
+
