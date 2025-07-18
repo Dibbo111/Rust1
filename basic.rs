@@ -115,25 +115,21 @@ fn main(){
 
 
 //dont follow this code ...first of all edit this code 
-use std::io::{self, Write};
 
-fn main() {
-    let vector: Vec<i32> = vec![232, 3232, 432, 432];
-    let ptr: *const i32 = vector.as_ptr();
-    let size: usize = vector.len();
-
+fn main(){
+    let vector : Vec<i32> = vec![32 , 342 , 43] ;
+    let ptr : *const i32 = vector.as_ptr() ;
+    let size : usize = vector.len() ;
     unsafe {
-        let raw_slice: &[i32] = std::slice::from_raw_parts(ptr, size);
-
-        for i in 0..size {
-            let mut stdout: std::io::Stdout = std::io::stdout();
-            let value: i32 = raw_slice[i];
-
-            // ✅ This is the correct extreme explicit form — no temp drop issue
+        let raw_slice : &[i32] = std::slice::from_raw_parts(ptr , size) ;
+        let number_range : std::ops::RangeInclusive<usize> = 0..=size -1  ;
+        for i in number_range {
+            let mut stdout : std::io::Stdout = std::io::stdout() ;
+            let value : i32 = raw_slice[i] ;
             std::io::Write::write_fmt(
-                &mut stdout,
-                std::format_args!("Slice of [{}] is {:?}\n", i, value)
-            ).unwrap();
+                &mut stdout ,
+                std::format_args!("\nIdx is {:?} of value is {:?}" , i , value)
+            ).unwrap() ;
         }
     }
 }
