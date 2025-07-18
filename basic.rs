@@ -66,5 +66,15 @@ fn main(){
     }
 }
 
+//for string understand all of how  ptr works ;
+fn main() {
+    let mut num: i32 = 999;
+    let ptr: *mut i32 = &mut num as *mut i32;
+
+    unsafe {
+        *ptr = 777;
+        println!("Modified value: {}", num);
+    }
+}
 //
 
