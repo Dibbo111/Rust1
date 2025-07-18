@@ -103,5 +103,12 @@ fn main() {
         println!("Second value: {}", *ptr.add(1)); 
     }
 }
-//another simple example 
-
+//on vector 
+fn main(){
+    let vector : Vec<i32> = vec![32 , 323 , 343 ,44] ;
+    let ptr : *const i32 = vector.as_ptr() ;
+    unsafe{
+        println!("First element is {:?}" , *ptr) ;
+        println!("2 nd element is {:?}" , *ptr.add(1)) ;
+    }
+}
