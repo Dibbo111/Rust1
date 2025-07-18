@@ -86,11 +86,9 @@ fn main() {
         let first_value: i32 = *ptr;
         println!("First value: {}", first_value);
         let second_ptr: *const i32 = ptr.add(1);
-        
         let second_value: i32 = *second_ptr;
         println!("Second value: {}", second_value);
         let third_ptr: *const i32 = ptr.add(2);
-        
         let third_value: i32 = *third_ptr;
         println!("Third value: {}", third_value);
     }
