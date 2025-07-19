@@ -135,33 +135,30 @@ fn main(){
 }
 
 //another simple example
-use std::slice;
-use std::io::{self, Write};
-
 fn main() {
     let array: [i32; 4] = [666, 777, 888, 999];
     let pointer_to_array: *const i32 = array.as_ptr();
     let array_length: usize = array.len();
-    let mut stdout_handle: std::io::Stdout = io::stdout();
-
+    let mut stdout_handle: std::io::Stdout = std::io::stdout();
     unsafe {
-        let constructed_raw_slice: &[i32] = slice::from_raw_parts(pointer_to_array, array_length);
+        let constructed_raw_slice: &[i32] =
+            std::slice::from_raw_parts(pointer_to_array, array_length);
         let mut current_index: usize = 0;
-
         while current_index < constructed_raw_slice.len() {
-            let value_pointer_at_index: *const i32 = constructed_raw_slice.get_unchecked(current_index);
+            // Extreme explicit dereference with pointer arithmetic
+            let value_pointer_at_index: *const i32 = constructed_raw_slice.as_ptr().add(current_index);
             let dereferenced_value: i32 = *value_pointer_at_index;
-
-            let output_string: String = format!(
+            let output_string: std::string::String = std::format!(
                 "Value at index {}: {}\n",
                 current_index,
                 dereferenced_value
             );
-
-            // Convert to bytes and write using low-level handle
-            let _ = stdout_handle.write_all(output_string.as_bytes());
-            let _ = stdout_handle.flush();
-
+            let output_bytes: &[u8] = output_string.as_bytes();
+            let _write_result: std::io::Result<()> = std::io::Write::write_all(
+                &mut stdout_handle,
+                output_bytes,
+            );
+            let _flush_result: std::io::Result<()> = std::io::Write::flush(&mut stdout_handle);
             current_index += 1;
         }
     }
