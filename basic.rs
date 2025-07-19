@@ -116,23 +116,39 @@ fn main(){
 
 //dont follow this code ...first of all edit this code 
 
-fn main(){
-    let vector : Vec<i32> = vec![32 , 342 , 43] ;
-    let ptr : *const i32 = vector.as_ptr() ;
-    let size : usize = vector.len() ;
+fn main() {
+    let vector: Vec<i32> = vec![32, 342, 43];
+    let ptr: *const i32 = vector.as_ptr();
+    let size: usize = vector.len();
+
     unsafe {
-        let raw_slice : &[i32] = std::slice::from_raw_parts(ptr , size) ;
-        let number_range : std::ops::RangeInclusive<usize> = 0..=size -1  ;
+        let raw_slice: &[i32] = std::slice::from_raw_parts(ptr, size);
+        let number_range: std::ops::RangeInclusive<usize> = 0..=size - 1;
+
         for i in number_range {
-            let mut stdout : std::io::Stdout = std::io::stdout() ;
-            let value : i32 = raw_slice[i] ;
-            std::io::Write::write_fmt(
-                &mut stdout ,
-                std::format_args!("\nIdx is {:?} of value is {:?}" , i , value)
-            ).unwrap() ;
+            let mut stdout: std::io::Stdout = std::io::stdout();
+
+            // ❌ No safe indexing — pure unsafe raw pointer math
+            let value_pointer: *const i32 = raw_slice.as_ptr().add(i);
+            let value: i32 = *value_pointer;
+
+            // ✅ Fully stable formatting + byte casting
+            let output_string: std::string::String = std::format!(
+                "\nIdx is {:?} of value is {:?}",
+                i,
+                value
+            );
+            let output_bytes: &[u8] = output_string.as_bytes();
+
+            let _write_result: std::io::Result<()> =
+                std::io::Write::write_all(&mut stdout, output_bytes);
+
+            let _flush_result: std::io::Result<()> =
+                std::io::Write::flush(&mut stdout);
         }
     }
 }
+
 
 //another simple example
 fn main() {
