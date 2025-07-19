@@ -12,7 +12,7 @@ fn main() {
             std::process::exit(1);
         }
     };
-    let message: &[u8] = b"Hacker Hello, World!\n";
+    let message: &[u8] = b" Hello, World!\n";
     match std::io::Write::write_all(&mut stdout, message) {
         Ok(_) => {},
         Err(error) => {
