@@ -198,4 +198,15 @@ ____for loop is safe ...while loop is unsafe and low level
     }
 }
 
-//
+//lets learn mutable pointer in rust
+____range of u8 is = 0 to 255.....
+fn main(){
+    let mut vector : Vec<u8> = vec![32 , 43 , 43 , 53] ;
+    let pointer_to_vector : *mut u8 = vector.as_mut_ptr() ;
+
+    unsafe {
+        *pointer_to_vector = 10 ;
+        println!("Your pointer is {:?}" , *pointer_to_vector) ;
+
+    }
+}
