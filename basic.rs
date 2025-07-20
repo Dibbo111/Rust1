@@ -210,3 +210,27 @@ fn main(){
 
     }
 }
+//just mutable 
+fn main(){
+    let mut array : [i32 ; 4] = [32 , 34 , 45 , 54] ;
+    let array_size : usize = array.len() ;
+    let pointer_to_array : *mut i32 = array.as_mut_ptr() ;
+    unsafe {
+        let conostructed_raw_slice : &mut [i32] = std::slice::from_raw_parts_mut(pointer_to_array ,array_size) ;
+        let mut current_index : usize = 0 ;
+        let conostructed_raw_slice_length : usize = conostructed_raw_slice.len() ;
+        while current_index < conostructed_raw_slice_length {
+            let main_value_from_ptr : &mut i32 = conostructed_raw_slice.get_unchecked_mut(current_index) ;
+            *main_value_from_ptr += 100 ;
+            let dereferenced_value : i32 = *main_value_from_ptr ;
+            let mut stdout : std::io::Stdout = std::io::stdout() ;
+            let string_output : std::string::String = std::format!("\nIndex is {:?} of main value {:?}" , current_index ,dereferenced_value) ;
+            let output_as_bytes : &[u8] = string_output.as_bytes() ;
+            let _result_out : std::io::Result<()> = std::io::Write::write_all(&mut stdout ,output_as_bytes) ;
+            let _flushed_out : std::io::Result<()> = std::io::Write::flush(&mut stdout) ;
+            current_index += 1 ;
+        }
+    }
+    std::process::exit(0) ;
+
+}
