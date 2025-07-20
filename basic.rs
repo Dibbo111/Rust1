@@ -179,3 +179,23 @@ fn main() {
         }
     }
 }
+---------------get_unchecked() is check no bound 
+____for loop is safe ...while loop is unsafe and low level 
+//another simple example 
+ fn main(){
+    let array : [i32 ; 5] = [32 , 34 , 43 , 65 ,45] ;
+    let pointer_to_array : *const i32 = array.as_ptr() ;
+    let array_len : usize = array.len() ;
+    unsafe {
+        let raw_slice : &[i32] = std::slice::from_raw_parts(pointer_to_array , array_len) ;
+        let mut current_index : usize = 0 ;
+        while current_index < raw_slice.len(){
+            let raw_value_ref : &i32 = raw_slice.get_unchecked(current_index);
+            let dref_value : i32 = *raw_value_ref ;
+            println!("The idx {:?} of main value {:?}" , current_index , dref_value) ;
+            current_index += 1 ;
+        }
+    }
+}
+
+//
