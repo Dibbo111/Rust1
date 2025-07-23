@@ -232,5 +232,16 @@ fn main(){
         }
     }
     std::process::exit(0) ;
-
 }
+//mutable , immutable , read_only 
+fn main(){
+    let mut name : std::string::String = String::from("Sohee Al Mahdi Dibbo !") ;
+    {
+        let slice : &mut str = name.get_mut(0..10).expect("Failed to do it !") ;
+        let x : &str = &*slice ;
+        println!("Read only data {:?}" , x) ;
+        println!("Mutable data {:?}" , slice) ;
+    } //x and slice is now out of scope ;
+    println!("Your main data is {:?}" , name) ;
+}
+
