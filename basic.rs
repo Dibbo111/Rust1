@@ -245,3 +245,12 @@ fn main(){
     println!("Your main data is {:?}" , name) ;
 }
 //____for ownership and borrowing 
+fn main() {
+    let secret = String::from("NSA Core Exploit");
+    let ref1 = &secret;
+    let ref2 = &secret;
+
+    println!("ref1: {}", ref1);
+    println!("ref2: {}", ref2);
+    println!("secret: {}", secret); 
+}
