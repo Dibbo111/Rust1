@@ -244,4 +244,4 @@ fn main(){
     } //x and slice is now out of scope ;
     println!("Your main data is {:?}" , name) ;
 }
-
+//____for ownership and borrowing 
