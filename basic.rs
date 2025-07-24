@@ -246,7 +246,7 @@ fn main(){
 }
 //____for ownership and borrowing 
 fn main() {
-    let secret = String::from("NSA Core Exploit");
+    let secret = String::from("dibbo");
     let ref1 = &secret;
     let ref2 = &secret;
 
