@@ -284,5 +284,157 @@ fn main(){
         &mut stdout ,
         formated_output_to_bytes
     ) ;
+}
 
+//this is advance explicit 
+fn calculator(number1: f64, number2: f64, operator: char) -> std::option::Option<f64> {
+    match operator {
+        '+' => {
+            let result_addition: f64 = number1 + number2;
+            std::option::Option::Some(result_addition)
+        },
+        '-' => {
+            let result_subtraction: f64 = number1 - number2;
+            std::option::Option::Some(result_subtraction)
+        },
+        '*' => {
+            let result_multiplication: f64 = number1 * number2;
+            std::option::Option::Some(result_multiplication)
+        },
+        '/' => {
+            if number2 != 0.0f64 {
+                let result_division: f64 = number1 / number2;
+                std::option::Option::Some(result_division)
+            } else {
+                std::option::Option::None
+            }
+        },
+        _ => std::option::Option::None,
+    }
+}
+
+fn main() {
+    let number1_input: f64 = 2.32f64;
+    let number2_input: f64 = 33.43f64;
+    let operator_input: char = '/';
+
+    let result: std::option::Option<f64> = calculator(number1_input, number2_input, operator_input);
+
+    let mut stdout: std::io::Stdout = std::io::stdout();
+
+    match result {
+        std::option::Option::Some(value) => {
+            let formatted_string: std::string::String = std::format!("✅ Result is: {}\n", value);
+            let formatted_bytes: &[u8] = formatted_string.as_bytes();
+            let write_result: std::io::Result<()> = std::io::Write::write_all(&mut stdout, formatted_bytes);
+            match write_result {
+                std::result::Result::Ok(()) => {},
+                std::result::Result::Err(e) => {
+                    let error_message: std::string::String = std::format!("❌ Write error: {:?}\n", e);
+                    let error_bytes: &[u8] = error_message.as_bytes();
+                    let _ = std::io::Write::write_all(&mut stdout, error_bytes);
+                }
+            }
+        },
+        std::option::Option::None => {
+            let error_message: &[u8] = b"❌ Invalid operation or division by zero.\n";
+            let write_result: std::io::Result<()> = std::io::Write::write_all(&mut stdout, error_message);
+            match write_result {
+                std::result::Result::Ok(()) => {},
+                std::result::Result::Err(e) => {
+                    let error_string: std::string::String = std::format!("❌ Write error: {:?}\n", e);
+                    let error_bytes: &[u8] = error_string.as_bytes();
+                    let _ = std::io::Write::write_all(&mut stdout, error_bytes);
+                }
+            }
+        }
+    }
+}
+//this is extreme explicit 
+//🔥 Import only what we will brutally manipulate
+extern crate core;
+
+fn calculator(number1: f64, number2: f64, operator: char) -> std::option::Option<f64> {
+    match operator {
+        '+' => {
+            let sum_result: f64 = number1 + number2;
+            std::option::Option::Some(sum_result)
+        },
+        '-' => {
+            let diff_result: f64 = number1 - number2;
+            std::option::Option::Some(diff_result)
+        },
+        '*' => {
+            let mul_result: f64 = number1 * number2;
+            std::option::Option::Some(mul_result)
+        },
+        '/' => {
+            let zero: f64 = 0.0f64;
+            let is_not_zero: bool = number2 != zero;
+            if is_not_zero {
+                let div_result: f64 = number1 / number2;
+                std::option::Option::Some(div_result)
+            } else {
+                std::option::Option::None
+            }
+        },
+        _ => {
+            std::option::Option::None
+        },
+    }
+}
+
+fn main() {
+    let first_number: f64 = 2.32f64;
+    let second_number: f64 = 33.43f64;
+    let operator_symbol: char = '/';
+
+    let calculation_result: std::option::Option<f64> = calculator(first_number, second_number, operator_symbol);
+
+    let mut output_stream: std::io::Stdout = std::io::stdout();
+    match calculation_result {
+        std::option::Option::Some(result_value) => {
+            let message_prefix: &str = "✅ Result is: ";
+            let message_suffix: &str = "\n";
+            let mut constructed_message: std::string::String = std::string::String::new();
+
+            let _ = std::string::String::push_str(&mut constructed_message, message_prefix);
+
+            let result_as_string: std::string::String = std::format!("{}", result_value);
+            let _ = std::string::String::push_str(&mut constructed_message, &result_as_string);
+
+            let _ = std::string::String::push_str(&mut constructed_message, message_suffix);
+            let output_bytes: &[u8] = std::string::String::as_bytes(&constructed_message);
+
+            let write_result: std::io::Result<()> = std::io::Write::write_all(&mut output_stream, output_bytes);
+
+            match write_result {
+                std::result::Result::Ok(()) => {},
+                std::result::Result::Err(write_error) => {
+                    let mut error_string: std::string::String = std::string::String::from("❌ Write error: ");
+                    let error_detail: std::string::String = std::format!("{:?}", write_error);
+                    let _ = std::string::String::push_str(&mut error_string, &error_detail);
+                    let _ = std::string::String::push_str(&mut error_string, "\n");
+                    let error_bytes: &[u8] = std::string::String::as_bytes(&error_string);
+                    let _ = std::io::Write::write_all(&mut output_stream, error_bytes);
+                }
+            }
+        },
+        std::option::Option::None => {
+            let failure_message: &[u8] = "❌ Invalid operator or division by zero encountered.\n".as_bytes();
+            let write_result: std::io::Result<()> = std::io::Write::write_all(&mut output_stream, failure_message);
+            match write_result {
+                std::result::Result::Ok(()) => {},
+                std::result::Result::Err(write_error) => {
+                    let mut fatal_error_string: std::string::String = std::string::String::from("❌ Write error: ");
+                    let error_content: std::string::String = std::format!("{:?}", write_error);
+                    let _ = std::string::String::push_str(&mut fatal_error_string, &error_content);
+                    let _ = std::string::String::push_str(&mut fatal_error_string, "\n");
+
+                    let error_bytes: &[u8] = std::string::String::as_bytes(&fatal_error_string);
+                    let _ = std::io::Write::write_all(&mut output_stream, error_bytes);
+                }
+            }
+        }
+    }
 }
