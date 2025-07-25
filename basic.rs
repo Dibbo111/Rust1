@@ -254,3 +254,35 @@ fn main() {
     println!("ref2: {}", ref2);
     println!("secret: {}", secret); 
 }
+___________________________________writing 3 simple calculator code in explicit way 
+______________________1 => basic explicit 
+______________________2 => advance explicit 
+______________________3 => extreme explicit 
+//so the basic explicit is -
+    
+fn calculator(number1 : f64 , number2 : f64 , operator : char) -> std::option::Option<f64>{
+    match operator{
+        '+' => std::option::Option::Some(number1 + number2) ,
+        '-' => std::option::Option::Some(number1 - number2) ,
+        '*' => std::option::Option::Some(number1 * number2) ,
+        '/' => {
+            if number2 != 0.0f64{
+                std::option::Option::Some(number1 / number2)
+            }else{
+                std::option::Option::None
+            }
+        }
+        _ => std::option::Option::None ,
+    }
+}
+fn main(){
+    let result : std::option::Option<f64> = calculator(2.32 , 33.43 , '/') ;
+    let mut stdout : std::io::Stdout = std::io::stdout() ;
+    let formated_output : std::string::String = std::format!("Result is {:?}" , result) ;
+    let formated_output_to_bytes : &[u8] = formated_output.as_bytes() ;
+    let _main_result : std::io::Result<()> = std::io::Write::write_all(
+        &mut stdout ,
+        formated_output_to_bytes
+    ) ;
+
+}
