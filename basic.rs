@@ -350,3 +350,17 @@ fn main() {
         }
     }
 }
+//fizzbuzz 
+fn fizzbuzz(number : i32) -> String{
+    match (number %3 , number % 5){
+        (0, 0) => "FizzBuzz".to_string() ,
+        (0 , _) => "Fizz".to_string() ,
+        (_ , 0) => "buzz".to_string() ,
+        _ => number.to_string()
+    }
+}
+fn main(){
+    for i in 1..=10 {
+        println!("Result {:?}" , fizzbuzz(i)) ;
+    }
+}
