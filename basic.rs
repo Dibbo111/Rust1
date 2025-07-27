@@ -364,3 +364,21 @@ fn main(){
         println!("Result {:?}" , fizzbuzz(i)) ;
     }
 }
+
+//another simple of struct 
+struct Rectangle{
+    index: i32 ,
+    age : i32 ,
+}
+impl Rectangle{
+    fn area(&self) -> i32 {
+        self.index * self.age
+    }
+}
+fn main(){
+    let val = Rectangle{
+        index : 32 ,
+        age : 323 ,
+    } ;
+    println!("Area is {:?}" , val.area()) ;
+}
