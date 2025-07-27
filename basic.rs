@@ -418,3 +418,38 @@ fn main(){
     let cred : Credential = Credential("kohee", "12345") ;
     cred.display() ;
 }
+
+//using a custom constructor struct Credential(&'static str , &'static str) ;
+impl Credential{
+    fn new(username :&'static str , password :&'static str) -> Credential{
+        Credential(username , password)
+    }
+    fn display(&self){
+        println!("The username is {:?} and the password is {:?}" ,self.0 , self.1) ;
+    }
+}
+fn main(){
+    let cred : Credential = Credential::new("Kohee" , "1234") ;     //Credential::new() for the custom constructor ; 
+    cred.display() ;
+}
+
+//another simple example of magnitude .....using vector ....vector for pHyscis ...not like std::vec::Vector<T> 
+struct Vector2d(f64, f64);
+
+impl Vector2d {
+    fn new(value1: f64, value2: f64) -> Vector2d {
+        Vector2d(value1, value2)
+    }
+    fn magnitude(&self) -> f64 {
+        ((self.0 * self.0) + (self.1 * self.1)).sqrt()
+    }
+    fn display(&self) {
+        println!("The Vector is ({}, {})", self.0, self.1);
+        println!("Magnitude is {}", self.magnitude());
+    }
+}
+fn main() {
+    let vec: Vector2d = Vector2d::new(32.0, 33.2);
+    vec.display();
+}
+
