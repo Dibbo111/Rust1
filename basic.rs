@@ -382,3 +382,39 @@ fn main(){
     } ;
     println!("Area is {:?}" , val.area()) ;
 }
+//touple struct
+struct RGB(i32 , i32 , i32) ;
+fn main(){
+    let red = RGB(3 , 0 , 10) ;
+    let green = RGB(43 , 43 , 9) ;
+    let blue = RGB(43 , 654 , 54) ;
+    println!("The num of red {:?} {:?} {:?}" , red.0 , red.1 , red.2) ;
+    println!("The num of green {:?} {:?} {:?}" ,green.0 , green.1 , green.2) ;
+    println!("The num of blue {:?} {:?} {:?}" , blue.0 , blue.1 , blue.2) ;
+
+}
+
+//another simple example of touple struct  of explicit string lifetime annotation 
+struct Credential(&'static str , &'static str) ;
+fn main(){
+    let cred = Credential("admin" , "passwd") ;
+    println!("The user is {:?} and the passowrd is {:?}" , cred.0 , cred.1) ;
+
+}
+//with a explicit type 
+struct Credential(&'static str , &'static str) ;
+fn main(){
+    let cred : Credential = Credential("KOHEE" , "1234") ;
+    println!("The username is {:?} and the password is {:?}" , cred.0 , cred.1) ;
+}
+//Just added impl 
+struct Credential(&'static str , &'static str) ;
+impl Credential{
+    fn display(&self){
+        println!("The user name is {:?} and the password is {:?}" ,self.0 , self.1) ;
+    }
+}
+fn main(){
+    let cred : Credential = Credential("kohee", "12345") ;
+    cred.display() ;
+}
