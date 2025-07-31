@@ -453,3 +453,60 @@ fn main() {
     vec.display();
 }
 
+//another simple  example of stack using impl and struct 
+struct Stack{
+    data : [i32 ; 10] ,
+    index : usize ,
+}
+impl Stack{
+    fn new() -> Stack{
+        Stack {data : [0 ; 10] , index : 0}
+    }
+    fn push(&mut self , value : i32){
+        if self.index  < 10 {
+            self.data[self.index] = value ;
+            self.index = self.index + 1 ;
+        }else{
+            println!("Stack overflow ! value {:?}" , value) ;
+        }
+    }
+    fn pop(&mut self) -> i32 {
+        if self.index == 0 {
+            println!("Stack underflow !") ;
+            std::process::exit(1) ;
+        }
+        self.index = self.index - 1 ;
+        self.data[self.index]
+    }
+    fn print_stack(&self){
+        for i in 0..self.index{
+            if i > 0{
+                print!(" ,") ;
+            }
+            println!("Stacked value is {:?}" ,self.data[i]) ;
+        }
+    }
+}
+fn main(){
+    let mut stack : Stack = Stack::new() ;
+    for i in 1..5{
+        stack.push(i * 2 + 1) ;
+    }
+    stack.print_stack() ;
+    let popped : i32 = stack.pop() ;
+    println!("popped value is {:?}" , popped) ;
+    println!("After pop !") ;
+    stack.print_stack() ;
+
+    //underflow checking
+    for _i in 0..6{
+        let pop : i32 = stack.pop() ;
+        println!("Popped value but underflow as {:?}" , pop)  ;
+    }
+    stack.print_stack() ;
+    //overflow checking
+    for i in 1..20 {
+        stack.push(i * 10) ;
+    }
+    stack.print_stack() ;
+}
