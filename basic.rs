@@ -79,20 +79,17 @@ fn main() {
 //another simple example 
 //use std::ptr;
 
-fn main(){
-    let array : [i32  ;3] = [12 , 32 , 43] ;
-    let ptr : *const i32 = array.as_ptr() ;
-    unsafe {
-        let mut stdout : std::io::Stdout = std::io::stdout() ;
-        let message : &[u8] = b"The first element of the array is " ;
-        std::io::Write::write_all(&mut stdout , message).unwrap() ;
-        let value : i32 = std::ptr::read(ptr) ;
-        let mut number_buffer = itoa::Buffer::new() ;
-        let value_str : &str = number_buffer.format(value) ;
-        std::io::Write::write_all(&mut  stdout , value_str.as_bytes()).unwrap() ;
+fn main() {
+    let array = [12, 32, 43];
+    let ptr = array.as_ptr();
 
+    unsafe {
+        print!("The first element of the array is ");
+        let value = std::ptr::read(ptr);
+        println!("{}", value);
     }
 }
+
 
 //another simple of pointer on array 
 fn main() {
