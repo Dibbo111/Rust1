@@ -85,7 +85,7 @@ fn main() {
 
     unsafe {
         print!("The first element of the array is ");
-        let value = std::ptr::read(ptr);
+        let value = std::ptr::read(ptr);      //raw copy
         println!("{}", value);
     }
 }
