@@ -545,3 +545,39 @@ fn main(){
     }
 
 }
+
+//another simple example returning result 
+struct Counter{
+    number : i32 ,
+    limit : i32 ,
+}
+impl Counter{
+    fn new(number : i32 , limit : i32) -> Counter{
+        Counter{number , limit}
+    }
+    fn count(&mut self){
+        while self.number < self.limit{
+            self.number = self.number + 1 ;
+            println!("Your number is {:?}" , self.number) ;
+            if self.number == self.limit{
+                eprintln!("Number limit reached at {:?}" , self.number) ;
+                std::process::exit(1) ;
+            }
+        }
+    }
+    fn get(&self) -> Result<i32 , String>{
+        if self.number <= self.limit{
+            Ok(self.number)
+        }else{
+            Err("Limit reached ....no valid number !".to_string())
+        }
+    }
+}
+fn main(){
+    let mut count = Counter::new(0 , 10) ;
+    count.count() ;
+    match count.get(){
+        Ok(num) => println!("{:?}" , num) ,
+        Err(e) => eprintln!("Error {:?}" , e) ,
+    }
+}
