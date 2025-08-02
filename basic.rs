@@ -507,3 +507,41 @@ fn main(){
     }
     stack.print_stack() ;
 }
+//another simple example of counting ...using struct , impl and Option type 
+struct Counter{
+    number : i32 ,
+    limit : i32 ,
+}
+impl Counter{
+    fn new(number : i32 , limit : i32)-> Counter{
+        Counter{number , limit}
+    }
+    fn count(&mut self){
+        while self.number < self.limit {
+            self.number = self.number + 1 ;
+            println!("Num : {:?}" , self.number) ;
+            if self.number == self.limit{
+                eprintln!("Number limit reached {:?}" , self.number) ;
+                std::process::exit(1) ;
+            }
+        }
+    }
+    fn get(&self) -> Option<i32>{
+        if self.number <= self.limit{
+            Some(self.number)
+        }else{
+            None
+        }
+    }
+}
+fn main(){
+    let mut count : Counter = Counter::new(2 , 34) ;
+    count.count() ;
+    match count.get(){
+        Some(number) => {
+            println!("Number {:?}" , number) ;
+        }
+        None => println!("No number found") ,
+    }
+
+}
