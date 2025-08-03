@@ -657,3 +657,14 @@ fn main() {
         println!("{:?}", row);
     }
 }
+//another simple example of vector 
+fn main(){
+    let vec : std::vec::Vec<std::vec::Vec<i32>> = std::vec::Vec::from([
+        std::vec::Vec::from([1 , 2 ,3]) ,
+        std::vec::Vec::from([2 , 3 , 4]) ,
+        std::vec::Vec::from([3 , 4 , 5]) ,
+    ]) ;
+    for i in &vec{
+        println!("Vector is {:?}" , i) ;
+    }
+}
