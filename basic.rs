@@ -633,3 +633,27 @@ fn main(){
     }
     println!("Timer finished !") ;
 }
+//simple example of vector in vector using matrix 
+fn main() {
+    let matrix1 = vec![
+        vec![1, 2],
+        vec![3, 4],
+    ];
+
+    let matrix2 = vec![
+        vec![5, 6],
+        vec![7, 8],
+    ];
+
+    let mut result = vec![vec![0; 2]; 2];
+
+    for i in 0..2 {
+        for j in 0..2 {
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+    println!("add of matrix ");
+    for row in result {
+        println!("{:?}", row);
+    }
+}
