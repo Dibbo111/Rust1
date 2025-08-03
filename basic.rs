@@ -604,3 +604,32 @@ fn main(){
     colour.invert() ;
     println!("After invert -----> red {:?} green {:?} blue {:?}" , colour.red , colour.green , colour.blue) ; 
 }
+//another simple example of a timer 
+use std::{thread , time} ; 
+
+struct Timer{
+    sec : i32 ,
+}
+impl Timer{
+    fn new(sec : i32)-> Timer{
+        Timer{sec}
+    }
+    fn tick(&mut self){
+        if self.sec > 0 {
+            self.sec = self.sec - 1 ; 
+        }
+    }
+    fn is_finished(&self)-> bool{
+        self.sec == 0 
+    }
+}
+fn main(){
+    let mut  timer : Timer = Timer::new(5) ; 
+    println!("Timer has set for {:?} second !" , timer.sec) ; 
+    while !timer.is_finished(){
+        timer.tick() ; 
+        thread::sleep(time::Duration::from_secs(1)) ; 
+        println!("Time left {:?} second !" , timer.sec) ;
+    }
+    println!("Timer finished !") ;
+}
