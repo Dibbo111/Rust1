@@ -581,3 +581,26 @@ fn main(){
         Err(e) => eprintln!("Error {:?}" , e) ,
     }
 }
+//another simple example 
+//colour inverting theoreme ---------->    Inverted Component=255−Original Component
+struct Colour{
+    red : u32 , 
+    green : u32 , 
+    blue : u32 ,
+}
+impl Colour{
+    fn new(red : u32 , green : u32 , blue : u32) -> Colour{
+        Colour{red , green , blue}
+    }
+    fn invert(&mut self){
+        self.red = 255 - self.red  ; 
+        self.green = 255 - self.green  ; 
+        self.blue = 255 - self.blue ; 
+    }
+}
+fn main(){
+    let mut colour : Colour = Colour::new(33 , 22 , 43) ; 
+    println!("orginal colour -> red {:?} green {:?} blue {:?}" , colour.red , colour.green , colour.blue) ; 
+    colour.invert() ;
+    println!("After invert -----> red {:?} green {:?} blue {:?}" , colour.red , colour.green , colour.blue) ; 
+}
