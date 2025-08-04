@@ -683,3 +683,30 @@ fn main() {
         println!();
     }
 }
+//just reversing 
+fn main(){
+    let mut vector : std::vec::Vec<std::vec::Vec<i32>> = std::vec::Vec::new() ;
+    let mut count = 0 ;
+    for _i in 0..3{
+        let mut row : std::vec::Vec<i32> = std::vec::Vec::new() ;
+        for _j in 0..3{
+            row.push(count) ;
+            count = count + 1 ;
+        }
+        vector.push(row) ;
+    }
+    println!("Printing vector _____") ;
+    for i in 0..vector.len(){
+        for j in 0..3{
+            print!("{:?}" , vector[i][j]) ;
+        }
+        println!("") ;
+    }
+    println!("Reversed vew !") ;
+    for i in (0..3).rev(){
+        for j in (0..3).rev(){
+            print!("{:?}" , vector[i][j]) ;
+        }
+        println!("") ;
+    }
+}
