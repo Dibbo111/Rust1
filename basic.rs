@@ -710,3 +710,21 @@ fn main(){
         println!("") ;
     }
 }
+//another simple example to find the largest number 
+fn main() {
+    let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ];
+    let mut max = matrix[0][0];
+    for i in 0..3 {
+        for j in 0..3 {
+            if matrix[i][j] > max {
+                max = matrix[i][j];
+            }
+        }
+    }
+    println!("Max number = {}", max); 
+}
+
