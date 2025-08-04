@@ -668,3 +668,18 @@ fn main(){
         println!("Vector is {:?}" , i) ;
     }
 }
+//matrix , nested loops and more 
+fn main() {
+    let mut matrix: [[i32; 3]; 3] = [[0; 3]; 3]; 
+    for i in 0..3 {
+        for j in 0..3 {
+            matrix[i][j] = (i * 3 + j + 1) as i32;
+        }
+    }
+    for i in 0..3 {
+        for j in 0..3 {
+            print!("{} ", matrix[i][j]);
+        }
+        println!();
+    }
+}
