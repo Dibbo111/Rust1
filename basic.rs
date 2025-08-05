@@ -819,3 +819,21 @@ fn main(){
     println!("The max value is {:?} of position {:?}" , max_value , max_position) ;
     println!("The min value is {:?} of position {:?}" , min_value  ,min_position) ;
 }
+//reverse the row of the matrix 
+fn main(){
+    let mut  array : [[i32 ; 3] ; 3] = [
+        [1 , 2 , 3 ] ,
+        [3 , 4 , 5]  ,
+        [6 , 7 , 8]  ,
+    ];
+    for i in 0..3{
+        array[i].reverse() ;
+    }
+    for i in 0..3{
+        for j in 0..3{
+            print!("{:?}" , array[i][j]) ;
+        }
+        println!("") ;
+    }
+}
+
