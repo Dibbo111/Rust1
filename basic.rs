@@ -706,4 +706,16 @@ fn main(){
         println!() ;
     }
 }
+//this code will ve vaild when row index == column index
+fn main() {
+    let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ];
 
+    println!("Main Diagonal:");
+    for i in 0..3 {
+        println!("{}", matrix[i][i]); 
+    }
+}
