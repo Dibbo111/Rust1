@@ -743,3 +743,53 @@ fn main(){
     }
     println!("The sum is {:?}" , sum) ;
 }
+//for collum wise addition 
+fn main() {
+    let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+    ];
+
+    for j in 0..3 {
+        let mut col_sum = 0;
+        for i in 0..3 {
+            col_sum += matrix[i][j];
+        }
+        println!("Column {} sum = {}", j, col_sum);
+    }
+}
+//using while loop....building logic...adding number row wise and finding the bigest number form the sum 
+fn main(){
+    let matrix : [[i32 ; 3] ; 3] = [
+        [32 , 432 , 42] ,
+        [54 , 43 , 65] ,
+        [54 , 32, 43] ,
+    ];
+    let mut  row_sum : [i32 ; 3] = [0 ; 3] ;
+    let mut i = 0 ;
+    while i < 3{
+        let mut j = 0 ;
+        while j < 3{
+            row_sum[i] = row_sum[i] + matrix[i][j] ;
+            j = j + 1 ;
+        }
+        i = i + 1 ;
+    }
+    let mut index : usize = 0 ;
+    while index < 3 {
+        println!("The sum is {:?} of row {:?}" , row_sum[index] , index) ;
+        index = index + 1 ;
+    }
+    let mut max_sum = row_sum[0] ;
+    let mut max_row = 0 ;
+    let mut k = 1 ;
+    while k < 3{
+        if row_sum[k] > max_sum{
+            max_sum = row_sum[k] ;
+            max_row = k ;
+        }
+        k = k + 1 ;
+    }
+    println!("The max sum is {:?} in row {:?}" , max_sum , max_row) ;
+}
