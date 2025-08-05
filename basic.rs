@@ -836,4 +836,25 @@ fn main(){
         println!("") ;
     }
 }
+//transposing ____
+fn main(){
+    let array = [
+        [1 , 2 , 3] ,
+        [4 , 5 , 6] ,
+        [7 , 8 , 9] ,
+    ] ;
+    let mut transpose : [[i32 ; 3] ; 3] = [[0 ; 3] ; 3] ;
+    for i in 0..3{
+        for j in 0..3 {
+             transpose[j][i] = array[i][j] ;
+        }
+    }
+    println!("Transposed !") ;
+    for i in 0..transpose.len(){
+        for j in 0..3{
+            print!("{:?} " , transpose[i][j]) ;
 
+        }
+        println!("") ;
+    }
+}
