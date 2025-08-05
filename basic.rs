@@ -793,3 +793,29 @@ fn main(){
     }
     println!("The max sum is {:?} in row {:?}" , max_sum , max_row) ;
 }
+//another simple example find the min and max number with position 
+fn main(){
+    let matrix : [[i32 ; 3] ; 3] =[
+        [32 , 32 , 43] ,
+        [54 , 53 , 22] ,
+        [89 , 42 , 22] ,
+    ] ;
+    let mut min_value = matrix[0][0] ;
+    let mut max_value = matrix[0][0] ;
+    let mut max_position = (0 , 0) ;
+    let mut min_position = (0 , 0) ;
+    for i in 0..3{
+        for j in 0..3{
+            if matrix[i][j] > max_value{
+                max_value = matrix[i][j] ;
+                max_position = (i , j) ;
+            }
+            if matrix[i][j] < min_value{
+                min_value = matrix[i][j] ;
+                min_position = (i , j) ;
+            }
+        }
+    }
+    println!("The max value is {:?} of position {:?}" , max_value , max_position) ;
+    println!("The min value is {:?} of position {:?}" , min_value  ,min_position) ;
+}
