@@ -706,7 +706,7 @@ fn main(){
         println!() ;
     }
 }
-//this code will ve vaild when row index == column index
+//this code will be valid when row index == column index
 fn main() {
     let matrix = [
         [1, 2, 3],
@@ -718,4 +718,28 @@ fn main() {
     for i in 0..3 {
         println!("{}", matrix[i][i]); 
     }
+}
+//secondary diagonal 
+fn main(){
+    let matrix : [[i32 ; 3] ; 3] = [
+        [1 , 2 , 3] ,
+        [3 , 4 , 5]  ,
+        [6 , 7 , 8] ,
+    ] ;
+    for i in 0..3{
+        println!("Secondary diagonal {:?}" , matrix[i][2 - i]) ;
+    }
+}
+//the sum of secondary diagonal 
+fn main(){
+    let matrix : [[i32 ; 3] ; 3] = [
+        [1 , 2 , 3] ,
+        [4 , 5 , 6] ,
+        [7 , 8 , 9] ,
+    ] ;
+    let mut sum = 0 ;
+    for i in 0..3{
+        sum = sum + matrix[i][2 - i] ;
+    }
+    println!("The sum is {:?}" , sum) ;
 }
