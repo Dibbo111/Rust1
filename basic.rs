@@ -689,4 +689,21 @@ fn main() {
     }
     println!("Max number = {}", max); 
 }
+//just increase value 
+fn main(){
+    let mut vector :[[i32 ; 3] ; 3] = [[0 ; 3] ; 3] ;
+    let mut count = 1 ;
+    for i in 0..3{
+        for j in 0..3{
+            vector[i][j] = count ;
+            count = count + 1 ;
+        }
+    }
+    for i in 0..3{
+        for j in 0..3{
+            print!("{:?}" , vector[i][j]) ;
+        }
+        println!() ;
+    }
+}
 
