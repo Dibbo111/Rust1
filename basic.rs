@@ -632,31 +632,7 @@ fn main(){
         println!("Time left {:?} second !" , timer.sec) ;
     }
     println!("Timer finished !") ;
-}
-//simple example of vector in vector using matrix 
-fn main() {
-    let matrix1 = vec![
-        vec![1, 2],
-        vec![3, 4],
-    ];
-
-    let matrix2 = vec![
-        vec![5, 6],
-        vec![7, 8],
-    ];
-
-    let mut result = vec![vec![0; 2]; 2];
-
-    for i in 0..2 {
-        for j in 0..2 {
-            result[i][j] = matrix1[i][j] + matrix2[i][j];
-        }
-    }
-    println!("add of matrix ");
-    for row in result {
-        println!("{:?}", row);
-    }
-}
+} 
 //another simple example of vector 
 fn main(){
     let vec : std::vec::Vec<std::vec::Vec<i32>> = std::vec::Vec::from([
@@ -668,21 +644,7 @@ fn main(){
         println!("Vector is {:?}" , i) ;
     }
 }
-//matrix , nested loops and more 
-fn main() {
-    let mut matrix: [[i32; 3]; 3] = [[0; 3]; 3]; 
-    for i in 0..3 {
-        for j in 0..3 {
-            matrix[i][j] = (i * 3 + j + 1) as i32;
-        }
-    }
-    for i in 0..3 {
-        for j in 0..3 {
-            print!("{} ", matrix[i][j]);
-        }
-        println!();
-    }
-}
+
 //just reversing 
 fn main(){
     let mut vector : std::vec::Vec<std::vec::Vec<i32>> = std::vec::Vec::new() ;
