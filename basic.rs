@@ -858,3 +858,24 @@ fn main(){
         println!("") ;
     }
 }
+//using struct  and impl for matrix 
+struct Matrix{
+    data : [[i32 ; 3] ; 3] ,
+}
+impl Matrix{
+    fn new(data : [[i32 ; 3] ; 3]) -> Matrix{
+        Matrix{data : data}
+    }
+    fn display(&self){
+        for row in 0..3{
+            for coll in 0..3{
+                print!("{:?} " , self.data[row][coll]) ;
+            }
+            println!() ;
+        }
+    }
+}
+fn main(){
+    let mtx = Matrix::new([[32  , 43 , 22 ] , [43 , 322 , 54] , [78 , 67 , 5465]]) ; 
+    mtx.display() ;
+}
