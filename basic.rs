@@ -926,3 +926,42 @@ fn main(){
     sum.display() ;
     std::process::exit(0) ;
 }
+//i skeep this matrix multiplication ...to difiicult for me 
+struct Matrix2x2 {
+    data: [[i32; 2]; 2],
+}
+
+impl Matrix2x2 {
+    fn new(data: [[i32; 2]; 2]) -> Matrix2x2 {
+        Matrix2x2 { data }
+    }
+
+    fn multiply(&self, other: &Matrix2x2) -> Matrix2x2 {
+        let mut result = [[0; 2]; 2];
+        for i in 0..2 {
+            for j in 0..2 {
+                result[i][j] = 0;
+                for k in 0..2 {
+                    result[i][j] = result[i][j] + self.data[i][k] * other.data[k][j];
+                }
+            }
+        }
+        Matrix2x2::new(result)
+    }
+
+    fn display(&self) {
+        for row in 0..2 {
+            for col in 0..2 {
+                print!("{} ", self.data[row][col]);
+            }
+            println!();
+        }
+    }
+}
+
+fn main() {
+    let m1 = Matrix2x2::new([[1, 2], [3, 4]]);
+    let m2 = Matrix2x2::new([[2, 0], [1, 2]]);
+    let product = m1.multiply(&m2);
+    product.display();
+}
