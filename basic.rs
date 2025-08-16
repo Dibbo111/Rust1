@@ -517,53 +517,7 @@ fn main(){
     let mtx = Matrix::new([[32  , 43 , 22 ] , [43 , 322 , 54] , [78 , 67 , 5465]]) ; 
     mtx.display() ;
 }
-//explicitly adding 2 matrix 
-//i learnt the borrow rules of nested loop of explicit of for loop
-//using clone if i use ___range_var :  std::ops::RangeInclusive<usize> = 0..=3 - 1 ; 
-//i will never use std::process::exit(0) in any kind of loops 
-//every index and looping range should be usize 
-struct Matrix{
-    data :[[i32 ; 3]  ;3] ,
-}
-impl Matrix{
-    fn new(data : [[i32 ; 3] ; 3]) -> Matrix{
-        Matrix{data : data}
-    }
-    fn display(&self){
-        let mut stdout : std::io::Stdout = std::io::stdout() ;
-        let  range : std::ops::RangeInclusive<usize> = 0..=3 - 1 ;
-        for row in range.clone(){
-            for coll in range.clone(){
-                let formated_output : std::string::String = format!("\n{:?} " ,self.data[row][coll]) ; 
-                let formated_output_in_bytes : &[u8] = formated_output.as_bytes() ;
-                let _result : std::io::Result<()> = std::io::Write::write_all(&mut stdout , formated_output_in_bytes) ; 
-                let _flushed : std::io::Result<()> = std::io::Write::flush(&mut stdout) ;
-            }
-        } 
-    }
-    fn add(&self , other : &Matrix) -> Matrix{
-        let mut result : [[i32 ; 3] ; 3] = [[0 ; 3] ; 3] ; 
-        let num_range : std::ops::RangeInclusive<usize> = 0..=3 - 1 ; 
-        for row in num_range.clone(){
-            for coll in num_range.clone(){
-                result[row][coll] = self.data[row][coll] + other.data[row][coll] ;
-            }
-        }
-        Matrix::new(result)
-    }
-}
-fn main(){
-    let m1 : Matrix = Matrix::new([[32 , 33 , 34] , [35 , 36 , 37] , [38 , 39 , 40]]) ;
-    let m2 : Matrix = Matrix::new([[10 , 20 , 30] , [40 , 50 , 60] , [60 , 70 , 80]]) ;
-    std::println!("First Matrix is :") ; 
-    m1.display() ; 
-    std::println!("Second matrix is :") ;
-    m2.display() ;
-    let sum : Matrix = m1.add(&m2) ;
-    std::println!("The Sum is :") ; 
-    sum.display() ;
-    std::process::exit(0) ;
-}
+
 //i skeep this matrix multiplication ...to difiicult for me 
 struct Matrix2x2 {
     data: [[i32; 2]; 2],
