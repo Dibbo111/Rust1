@@ -557,3 +557,25 @@ fn main() {
     let product = m1.multiply(&m2);
     product.display();
 }
+//another simple example of struct ...
+struct Cal{
+    value : i32 ,
+}
+impl Cal{
+    fn new(value : i32)-> Self{
+        Self{
+            value : value
+        }
+    }
+    fn add(&mut self , x : i32){
+        self.value = self.value + x ;
+    }
+    fn get(&self)-> i32{
+        self.value
+    }
+}
+fn main(){
+    let mut cal = Cal::new(43) ;
+    cal.add(43) ;
+    println!("Sum is :{:?}" ,cal.get()) ;
+}
