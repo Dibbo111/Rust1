@@ -579,3 +579,51 @@ fn main(){
     cal.add(43) ;
     println!("Sum is :{:?}" ,cal.get()) ;
 }
+//another simple eample of first in first out 
+struct Queue{
+    data : [i32 ; 20] ,
+    rear : usize ,
+    front : usize ,
+    index : usize ,
+}
+impl Queue{
+    fn new()-> Self{
+        Self {
+            data : [0 ; 20] ,
+            rear : 0 ,
+            front : 0 ,
+            index : 0  ,
+        }
+    }
+    fn enqueue(&mut self , value : i32){
+        if self.index < 20{
+            self.data[self.rear] = value ;
+            self.rear = (self.rear + 1) % 20 ;
+            self.index = self.index + 1 ;
+        }
+    }
+    fn dequeue(&mut self)->Option<i32>{
+        if self.index > 0 {
+            let value = self.data[self.front] ;
+            self.front = (self.front + 1) % 20 ;
+            self.index = self.index - 1 ;
+            Some(value)
+        }else {
+            None
+        }
+    }
+}
+fn main(){
+    let mut q = Queue::new() ;
+    for i in 1..=20{
+        q.enqueue(i + 2) ;
+    }
+
+    for _i in 0..=5{
+        match q.dequeue(){
+            Some(num) => println!("Your number is {:?}" , num) ,
+            None => eprintln!("No vale found yet !") ,
+        }
+    }
+}
+
