@@ -627,3 +627,29 @@ fn main(){
     }
 }
 
+//another simple example of text processing 
+struct TextBuffer{
+    content : String ,
+}
+impl TextBuffer{
+    fn new()-> Self{
+        Self{content : String::new()}
+    }
+    fn append(&mut self ,s : &str){
+        self.content.push_str(s) ;
+    }
+    fn clear(&mut self){
+        self.content.clear() ;
+    }
+    fn length(&self)-> usize {
+        self.content.len()
+    }
+}
+fn main(){
+    let mut buff = TextBuffer::new() ;
+    buff.append("hello world") ;
+    buff.append("Hello dibbo") ;
+    println!("Test buffer size {:?}" , buff.length()) ;
+    buff.clear() ;
+    println!("Text buffer size {:?}" , buff.length()) ;
+}
