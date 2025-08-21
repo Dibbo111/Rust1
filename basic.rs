@@ -653,3 +653,33 @@ fn main(){
     buff.clear() ;
     println!("Text buffer size {:?}" , buff.length()) ;
 }
+//matrix multiplication done 
+struct Matrix {
+    data: [[i32; 3]; 3],
+}
+
+impl Matrix {
+    fn new(data: [[i32; 3]; 3]) -> Self {
+        Self { data }
+    }
+
+    fn multiply(&self, other: &Self) -> Self {
+        let mut result = [[0; 3]; 3];
+        for i in 0..3 {
+            for j in 0..3 {
+                for k in 0..3 {
+                    result[i][j] += self.data[i][k] * other.data[k][j];
+                }
+            }
+        }
+        Self::new(result)
+    }
+}
+
+fn main() {
+    let a = Matrix::new([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+    let b = Matrix::new([[9, 8, 7], [6, 5, 4], [3, 2, 1]]);
+    let c = a.multiply(&b);
+    println!("{:?}", c.data);
+}
+
