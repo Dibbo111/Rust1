@@ -682,4 +682,41 @@ fn main() {
     let c = a.multiply(&b);
     println!("{:?}", c.data);
 }
+//again binary search 
+struct Searcher{
+    vector :Vec<i32> ,
+}
+impl Searcher{
+    fn new(vector : Vec<i32>)-> Self{
+        Self{vector : vector}
+    }
+    fn binary_search(&self , target : i32)-> Option<usize>{
+        let mut low = 0 ;
+        let mut high = self.vector.len() as i32 - 1 ;
+        while low <= high{
+            let mid = (high + low) / 2 ;
+            let value = self.vector[mid as usize] ;
+            if target == value {
+                return Some(mid as usize) ;
+            }else if target > value{
+                low = mid + 1 ;
+            }else{
+                high = mid - 1 ;
+            }
+        }
+        None
+    }
+}
+fn main(){
+    let mut vector : Vec<i32> = Vec::new() ;
+    for i in 0..=10{
+        vector.push(i) ;
+    }
+    let searcher : Searcher = Searcher::new(vector.clone()) ;
+    match searcher.binary_search(6){
+        Some(index) => println!("Value is {:?} at index {:?}" ,vector[index] , index) ,
+        None => eprintln!("Target number has nhot found in the vector yet !") ,
+    }
+
+}
 
